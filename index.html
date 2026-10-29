@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charles Angel Mendoza — Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eaf4fb; --surface: #ffffff; --ink: #14213d; --muted: #4a5a78;
+    --slime: #3aa6dc; --slime-soft: #cfe9f7; --pop: #ff7a9c; --line: #14213d;
+  }
+  [data-theme="dark"] {
+    --bg: #0f1a2e; --surface: #17253f; --ink: #eaf4fb; --muted: #a9bad4;
+    --slime-soft: #1f3a5c; --line: #eaf4fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: "Figtree", system-ui, sans-serif; line-height: 1.65; font-size: 1.05rem; min-height: 100vh; transition: background .3s, color .3s; }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", "Figtree", system-ui, sans-serif; line-height: 1.1; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--pop); outline-offset: 3px; }
+
+  nav { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .5rem 1rem; padding: .8rem clamp(1rem, 5vw, 4rem); background: var(--bg); border-bottom: 2px solid var(--line); }
+  .logo { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 1.2rem; text-decoration: none; }
+  .tabs { display: flex; gap: .3rem; align-items: center; flex-wrap: wrap; }
+  .tabs a { text-decoration: none; font-weight: 600; padding: .35rem .9rem; border-radius: 999px; border: 2px solid transparent; }
+  .tabs a:hover { border-color: var(--line); }
+  .tabs a.active { background: var(--slime); color: #14213d; border-color: var(--line); }
+  #themeBtn { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--line); background: var(--surface); font-size: 1.1rem; }
+
+  .page { display: none; max-width: 1100px; margin: 0 auto; padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 5vw, 4rem); }
+  .page.active { display: block; animation: flip .45s ease; }
+  @keyframes flip { from { opacity: 0; transform: translateY(24px) rotateX(-8deg); } to { opacity: 1; transform: none; } }
+
+  h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: .5rem; }
+  .sub { color: var(--muted); margin-bottom: 2rem; max-width: 60ch; }
+  .meta { color: var(--muted); font-size: .95rem; }
+
+  .hero { display: grid; gap: 2.5rem; align-items: center; }
+  @media (min-width: 760px) { .hero { grid-template-columns: 340px 1fr; } }
+  .photo { aspect-ratio: 4/5; max-width: 340px; width: 100%; border: 3px solid var(--line); border-radius: 48% 52% 46% 54% / 40% 44% 56% 60%; background: var(--slime-soft); box-shadow: 10px 10px 0 var(--slime); overflow: hidden; display: grid; place-items: center; transition: border-radius .6s, transform .3s; }
+  .photo:hover { border-radius: 24px; transform: rotate(-2deg); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo .initials { font-family: "Bricolage Grotesque", sans-serif; font-size: 5rem; font-weight: 800; color: var(--slime); }
+  .hero h1 { font-size: clamp(2.4rem, 7vw, 4.4rem); font-weight: 800; letter-spacing: -.02em; }
+  .typing { margin: .8rem 0 1rem; font-size: 1.3rem; font-weight: 600; color: var(--slime); min-height: 2rem; }
+  .typing::after { content: "|"; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .hero p.intro { max-width: 52ch; color: var(--muted); }
+  .btns { margin-top: 1.6rem; display: flex; gap: .8rem; flex-wrap: wrap; align-items: center; }
+  .btn { display: inline-block; padding: .7rem 1.3rem; border: 2px solid var(--line); border-radius: 12px; font-weight: 600; text-decoration: none; background: var(--surface); transition: transform .15s, box-shadow .15s; }
+  .btn.main { background: var(--slime); color: #14213d; }
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--line); }
+
+  .gallery { columns: 1; column-gap: 1.2rem; }
+  @media (min-width: 560px) { .gallery { columns: 2; } }
+  @media (min-width: 900px) { .gallery { columns: 3; } }
+  .gallery figure { break-inside: avoid; margin-bottom: 1.2rem; border: 2px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); cursor: zoom-in; transition: transform .2s, box-shadow .2s; }
+  .gallery figure:hover { transform: translateY(-4px) rotate(-.6deg); box-shadow: 6px 6px 0 var(--slime); }
+  .gallery img { width: 100%; display: block; }
+  .gallery figcaption { padding: .6rem .9rem; font-weight: 600; font-size: .95rem; }
+  .gallery figure.missing { cursor: default; }
+  .gallery figure.missing img { display: none; }
+  .gallery figure.missing::before { content: "Add your drawing here"; display: grid; place-items: center; min-height: 180px; padding: 1rem; text-align: center; background: var(--slime-soft); color: var(--muted); }
+
+  dialog { border: 3px solid var(--line); border-radius: 14px; padding: 0; width: min(92vw, 900px); background: var(--surface); color: var(--ink); margin: auto; overflow: visible; }
+  dialog::backdrop { background: rgba(20, 33, 61, .85); }
+  dialog img { display: block; max-width: 100%; max-height: 75vh; margin: 0 auto; border-radius: 12px 12px 0 0; }
+  .viewer-bar { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .7rem 1rem; font-weight: 600; }
+  .vbtn { padding: .3rem .9rem; border: 2px solid var(--line); border-radius: 8px; background: var(--slime-soft); font-weight: 600; }
+  #closeViewer { background: var(--pop); color: #14213d; }
+
+  .seg { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+  .seg button { padding: .5rem 1.1rem; border: 2px solid var(--line); border-radius: 999px; background: var(--surface); font-weight: 600; }
+  .seg button[aria-selected="true"] { background: var(--slime); color: #14213d; }
+  .panel { display: none; }
+  .panel.active { display: block; animation: flip .35s ease; }
+  .card { background: var(--surface); border: 2px solid var(--line); border-radius: 14px; padding: 1.4rem 1.5rem; }
+  .card + .card { margin-top: 1.2rem; }
+  .card h3 { font-size: 1.3rem; margin-bottom: .7rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: .35rem; }
+  .entry + .entry { margin-top: 1rem; }
+  .entry strong { display: block; }
+  .two { display: grid; gap: 1.2rem; }
+  @media (min-width: 700px) { .two { grid-template-columns: 1fr 1fr; } .two .card + .card { margin-top: 0; } }
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0 !important; }
+  .chips li { margin: 0; padding: .3rem .9rem; border: 2px solid var(--line); border-radius: 999px; background: var(--slime-soft); font-weight: 500; transition: transform .15s, background .15s; }
+  .chips li:hover { transform: translateY(-3px) scale(1.05); background: var(--pop); color: #14213d; }
+
+  .contact-grid { display: grid; gap: 1.5rem; }
+  @media (min-width: 760px) { .contact-grid { grid-template-columns: 1fr 1.2fr; } }
+  form label { display: block; font-weight: 600; margin-bottom: .8rem; }
+  form input, form textarea { display: block; width: 100%; margin-top: .3rem; padding: .6rem .8rem; border: 2px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: inherit; }
+  form textarea { min-height: 120px; resize: vertical; }
+  #copyMsg { font-weight: 600; color: var(--slime); }
+
+  footer { border-top: 2px solid var(--line); padding: 1.5rem; text-align: center; color: var(--muted); }
+
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#home">Charles Angel</a>
+  <div class="tabs">
+    <a href="#home" data-link="home">Home</a>
+    <a href="#projects" data-link="projects">Projects</a>
+    <a href="#about" data-link="about">About</a>
+    <a href="#contact" data-link="contact">Contact</a>
+    <button id="themeBtn" type="button" aria-label="Switch light or dark mode">🌙</button>
+  </div>
+</nav>
+
+<main>
+  <section class="page" id="home">
+    <div class="hero">
+      <div class="photo">
+        <img src="Profile pic.jpg" alt="Photo of Charles Angel Mendoza" onerror="this.remove()">
+        <span class="initials" aria-hidden="true">CM</span>
+      </div>
+      <div>
+        <h1>Charles Angel L. Mendoza</h1>
+        <div class="typing" id="typing" aria-live="off"></div>
+        <p class="intro">
+          Hi! I'm a hardworking and motivated Information Systems student from Las Piñas City
+          with a passion for technology, graphic design, and drawing. I love helping others,
+          I'm skilled in computer support, and I'm always eager to learn new things so I can
+          grow and contribute to my team.
+        </p>
+        <div class="btns">
+          <a class="btn main" href="#projects">See my drawings</a>
+          <a class="btn" href="#about">About me</a>
+          <a class="btn" href="#contact">Contact me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="page" id="projects">
+    <h2>Projects</h2>
+    <p class="sub">A collection of my favorite drawings. Tap any piece to see it bigger, then swipe or use the arrows to browse.</p>
+    <div class="gallery" id="gallery"></div>
+  </section>
+  <section class="page" id="about">
+    <h2>About me</h2>
+    <p class="sub">Tap a button to see my background, skills, and more.</p>
+
+    <div class="seg" role="tablist">
+      <button type="button" role="tab" aria-selected="true" data-panel="p-exp">Experience</button>
+      <button type="button" role="tab" aria-selected="false" data-panel="p-edu">Education</button>
+      <button type="button" role="tab" aria-selected="false" data-panel="p-skills">Skills</button>
+      <button type="button" role="tab" aria-selected="false" data-panel="p-awards">Awards</button>
+    </div>
+
+    <div class="panel active" id="p-exp">
+      <div class="card">
+        <h3>Experience</h3>
+        <div class="entry">
+          <strong>On-the-Job Training — Pulang Lupa Dos Barangay Hall</strong>
+          <span class="meta">January 10 – 22, 2025 (80 hours, organized by Holy Rosary Academy of Las Piñas City)</span>
+          <ul>
+            <li>Encoded residents' data for record management and updated barangay information.</li>
+            <li>Helped organize, file, and arrange documents to keep the office orderly and efficient.</li>
+            <li>Supported barangay staff with administrative tasks and day-to-day operations.</li>
+            <li>Gained hands-on experience in data handling, record keeping, and basic office procedures.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="p-edu">
+      <div class="card">
+        <h3>Education</h3>
+        <div class="entry">
+          <strong>Bachelor of Science in Information Systems</strong>
+          <span class="meta">Dr. Filemon C. Aguilar Memorial College of Las Piñas City — expected graduation 2029</span>
+        </div>
+        <div class="entry">
+          <strong>Holy Rosary Academy of Las Piñas City</strong>
+          <span class="meta">Graduated 2025</span>
+        </div>
+        <div class="entry">
+          <strong>Captain Albert Aguilar National High School – Main</strong>
+          <span class="meta">Graduated 2023</span>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="p-skills">
+      <div class="two">
+        <div class="card">
+          <h3>Hard skills</h3>
+          <ul class="chips">
+            <li>Microsoft Office</li>
+            <li>Graphic design</li>
+            <li>Basic networking</li>
+            <li>Database management</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Soft skills</h3>
+          <ul class="chips">
+            <li>Communication &amp; teamwork</li>
+            <li>Adaptable &amp; organized</li>
+            <li>Time management</li>
+            <li>Critical thinking</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="p-awards">
+      <div class="card">
+        <h3>Awards &amp; recognitions</h3>
+        <ul>
+          <li>The Leader in Me Award in Physical Science (2023 – 2024)</li>
+          <li>With Honor (2023 – 2024)</li>
+          <li>With Honor (2024 – 2025)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="page" id="contact">
+    <h2>Contact</h2>
+    <p class="sub">Want to work together or just say hi? Send me a message.</p>
+    <div class="contact-grid">
+      <div class="card">
+        <h3>Email me</h3>
+        <p><a href="mailto:charlesangelmendoza4@gmail.com">charlesangelmendoza4@gmail.com</a></p>
+        <div class="btns">
+          <button class="btn" type="button" id="copyBtn">Copy email</button><span id="copyMsg" role="status"></span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Quick message</h3>
+        <form id="msgForm">
+          <label>Your name <input type="text" id="fName" required></label>
+          <label>Message <textarea id="fMsg" required></textarea></label>
+          <button class="btn main" type="submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dialog id="viewer" aria-label="Drawing viewer">
+  <img id="viewerImg" alt="">
+  <div class="viewer-bar">
+    <button type="button" class="vbtn" id="prevBtn" aria-label="Previous drawing">&larr;</button>
+    <span id="viewerCap"></span>
+    <button type="button" class="vbtn" id="nextBtn" aria-label="Next drawing">&rarr;</button>
+    <button type="button" class="vbtn" id="closeViewer">Close</button>
+  </div>
+</dialog>
+
+<footer>© <span id="year"></span> Charles Angel L. Mendoza</footer>
+
+<script>
+  const drawings = [
+    { src: "img1.jpg", title: "Orihime Inoue" },
+    { src: "img2.jpg", title: "Rukia Kuchiki" },
+    { src: "img3.jpg", title: "Pinterest Guy" },
+    { src: "img4.jpg", title: "Markiplier" },
+    { src: "img5.jpg", title: "Karina Aespa" },
+    { src: "img6.jpg", title: "Lucifer Portrait" }
+  ];
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const pages = ["home", "projects", "about", "contact"];
+  function showPage() {
+    let name = location.hash.replace("#", "");
+    if (!pages.includes(name)) name = "home";
+    pages.forEach(p => document.getElementById(p).classList.toggle("active", p === name));
+    document.querySelectorAll("[data-link]").forEach(a => a.classList.toggle("active", a.dataset.link === name));
+    window.scrollTo(0, 0);
+  }
+  addEventListener("hashchange", showPage);
+  showPage();
+
+  const themeBtn = document.getElementById("themeBtn");
+  function setTheme(t) {
+    document.documentElement.dataset.theme = t;
+    themeBtn.textContent = t === "dark" ? "☀️" : "🌙";
+  }
+  setTheme(matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  themeBtn.addEventListener("click", () => setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
+
+  const roles = ["Information Systems student", "Graphic designer", "Artist who loves to draw", "Always learning"];
+  const typingEl = document.getElementById("typing");
+  if (reduce) { typingEl.textContent = roles[0]; }
+  else {
+    let r = 0, c = 0, del = false;
+    (function tick() {
+      const word = roles[r];
+      typingEl.textContent = word.slice(0, c);
+      if (!del && c < word.length) c++;
+      else if (!del) { del = true; return setTimeout(tick, 1400); }
+      else if (c > 0) c--;
+      else { del = false; r = (r + 1) % roles.length; }
+      setTimeout(tick, del ? 40 : 80);
+    })();
+  }
+
+  const gallery = document.getElementById("gallery");
+  const viewer = document.getElementById("viewer");
+  const viewerImg = document.getElementById("viewerImg");
+  const viewerCap = document.getElementById("viewerCap");
+  let current = 0;
+
+  function openAt(i) {
+    current = (i + drawings.length) % drawings.length;
+    viewerImg.src = drawings[current].src;
+    viewerImg.alt = drawings[current].title;
+    viewerCap.textContent = drawings[current].title;
+    if (!viewer.open) viewer.showModal();
+  }
+  drawings.forEach((d, i) => {
+    const fig = document.createElement("figure");
+    const img = document.createElement("img");
+    img.src = d.src; img.alt = d.title; img.loading = "lazy";
+    img.onerror = () => fig.classList.add("missing");
+    const cap = document.createElement("figcaption");
+    cap.textContent = d.title;
+    fig.append(img, cap);
+    fig.addEventListener("click", () => { if (!fig.classList.contains("missing")) openAt(i); });
+    gallery.appendChild(fig);
+  });
+  document.getElementById("prevBtn").onclick = () => openAt(current - 1);
+  document.getElementById("nextBtn").onclick = () => openAt(current + 1);
+  document.getElementById("closeViewer").onclick = () => viewer.close();
+  viewer.addEventListener("click", e => { if (e.target === viewer) viewer.close(); });
+  addEventListener("keydown", e => {
+    if (!viewer.open) return;
+    if (e.key === "ArrowLeft") openAt(current - 1);
+    if (e.key === "ArrowRight") openAt(current + 1);
+  });
+  let startX = 0;
+  viewer.addEventListener("touchstart", e => { startX = e.touches[0].clientX; }, { passive: true });
+  viewer.addEventListener("touchend", e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50) openAt(current + (dx < 0 ? 1 : -1));
+  });
+
+  document.querySelectorAll(".seg button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".seg button").forEach(b => b.setAttribute("aria-selected", b === btn));
+      document.querySelectorAll(".panel").forEach(p => p.classList.toggle("active", p.id === btn.dataset.panel));
+    });
+  });
+
+  const email = "charlesangelmendoza4@gmail.com";
+  document.getElementById("copyBtn").addEventListener("click", async () => {
+    const msg = document.getElementById("copyMsg");
+    try { await navigator.clipboard.writeText(email); msg.textContent = "Copied!"; }
+    catch (e) { msg.textContent = "Copy failed, please copy it manually."; }
+    setTimeout(() => msg.textContent = "", 2500);
+  });
+  document.getElementById("msgForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const name = document.getElementById("fName").value;
+    const body = document.getElementById("fMsg").value;
+    location.href = "mailto:" + email + "?subject=" + encodeURIComponent("Message from " + name) + "&body=" + encodeURIComponent(body);
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
